@@ -1,7 +1,10 @@
 from flask import Flask, request, redirect
 import requests
 import base64
+from dotenv import load_dotenv
+import os
 import urllib.parse
+load_dotenv()
 
 
 endpoint = "https://api.spotify.com/v1/me"
@@ -9,8 +12,9 @@ endpoint = "https://api.spotify.com/v1/me"
 app = Flask(__name__)
 
 # Spotify API bilgileri
-CLIENT_ID = '3b24f28c383e4c4284db0f96a5e2d4bc'
-CLIENT_SECRET = '6da311f8a43843ebadea23cb925f50d4'
+
+CLIENT_ID = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 REDIRECT_URI = 'http://localhost:8888/callback'
 SCOPES = 'user-read-private user-read-email'
 
