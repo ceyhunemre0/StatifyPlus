@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Top Spotify Tracks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1db954;
+            padding: 20px;
+            color: white;
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+
+        .track-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .track-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .track-item img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .track-item h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #000;
+            /* Siyah renk */
+        }
+
+        .track-item p {
+            color: #666;
+        }
+
+        footer {
+            margin-top: 40px;
+            background-color: #1db954;
+            color: white;
+            padding: 10px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .filter-form {
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-form select {
+            padding: 8px;
+            font-size: 16px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        .filter-form button {
+            padding: 10px 20px;
+            background-color: #1db954;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-form button:hover {
+            background-color: #1ed760;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Your Top Spotify Tracks</h1>
+    </header>
+
+    <div class="content">
+
+        <h2>Top Tracks for {{ time_range | capitalize }}</h2>
+
+        <!-- Filter Form -->
+        <div class="filter-form">
+            <form action="/top-tracks" method="get">
+                <label for="timeRange">Time Range:</label>
+                <select name="timeRange" id="timeRange">
+                    <option value="short_term" {% if time_range=='short_term' %}selected{% endif %}>Short Term</option>
+                    <option value="medium_term" {% if time_range=='medium_term' %}selected{% endif %}>Medium Term
+                    </option>
+                    <option value="long_term" {% if time_range=='long_term' %}selected{% endif %}>Long Term</option>
+                </select>
+
+                <label for="limit">Limit:</label>
+                <select name="limit" id="limit">
+                    <option value="10" {% if limit==10 %}selected{% endif %}>10</option>
+                    <option value="20" {% if limit==20 %}selected{% endif %}>20</option>
+                    <option value="50" {% if limit==50 %}selected{% endif %}>50</option>
+                </select>
+
+                <label for="offset">Offset:</label>
+                <select name="offset" id="offset">
+                    <option value="0" {% if offset==0 %}selected{% endif %}>0</option>
+                    <option value="10" {% if offset==10 %}selected{% endif %}>10</option>
+                    <option value="20" {% if offset==20 %}selected{% endif %}>20</option>
+                </select>
+
+                <button type="submit">Apply Filters</button>
+            </form>
+        </div>
+
+        <!-- Track List -->
+        <div class="track-list">
+            {% for track in tracks %}
+            <div class="track-item">
+                <a href="{{ track['external_urls']['spotify'] }}" target="_blank">
+                    <img src="{{ track['album']['images'][0]['url'] }}" alt="Album Art">
+                    <h3>{{ track['name'] }}</h3>
+                    <p>Artist: {{ track['artists'][0]['name'] }}</p>
+                    <p>Duration: {{ track['duration_ms'] | format_duration }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            {% if offset > 0 %}
+            <a href="/top-tracks?timeRange={{ time_range }}&limit={{ limit }}&offset={{ offset - limit }}">Previous</a>
+            {% endif %}
+            <span> | </span>
+            <a href="/top-tracks?timeRange={{ time_range }}&limit={{ limit }}&offset={{ offset + limit }}">Next</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Powered by <a href="https://www.spotify.com" target="_blank">Spotify</a></p>
+    </footer>
+
+</body>
+
+</html>

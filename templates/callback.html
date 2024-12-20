@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Callback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        .message {
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            margin: 20px;
+        }
+        .error {
+            background-color: #f44336;
+        }
+        a {
+            color: #008CBA;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+{% if success %}
+    <div class="message">
+        <h2>Login Successful!</h2>
+        <p>You have successfully logged in with Spotify.</p>
+        <p>Access Token is saved in your session.</p>
+        <a href="/top-tracks">Go to Your Top Tracks</a>
+    </div>
+{% else %}
+    <div class="message error">
+        <h2>Authorization Failed</h2>
+        <p>There was an issue with your login. Please try again.</p>
+        <a href="/login">Try again</a>
+    </div>
+{% endif %}
+
+</body>
+</html>
