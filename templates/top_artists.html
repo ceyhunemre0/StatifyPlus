@@ -7,6 +7,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="/static/top-artists.css">
+    <style>
+        .time-range-selector {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .time-range-selector a {
+            margin: 0 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: black;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+        .time-range-selector a.selected {
+            background-color: green;
+            color: white;
+            border-color: green;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -28,27 +48,13 @@
     </nav>
 
     <h1>Top Artists</h1>
-    <!-- Form for selecting time range and limit -->
-    <div class="filter-container">
-        <form action="/top-artists" method="get">
-            <label for="timeRange">Time Range:</label>
-            <select name="timeRange" id="timeRange">
-                <option value="short_term" {% if time_range == 'short_term' %}selected{% endif %}>Last 4 Weeks</option>
-                <option value="medium_term" {% if time_range == 'medium_term' %}selected{% endif %}>Last 6 Months</option>
-                <option value="long_term" {% if time_range == 'long_term' %}selected{% endif %}>All Time</option>
-            </select>
 
-            <label for="limit">Limit:</label>
-            <select name="limit" id="limit">
-                <option value="10" {% if limit == 10 %}selected{% endif %}>10</option>
-                <option value="20" {% if limit == 20 %}selected{% endif %}>20</option>
-                <option value="50" {% if limit == 50 %}selected{% endif %}>50</option>
-            </select>
-            <button type="submit">Apply</button>
-        </form>
+    <!-- Time Range Selector -->
+    <div class="time-range-selector">
+        <a href="/top-artists?timeRange=short_term" class="{% if time_range == 'short_term' %}selected{% endif %}">Last 4 Weeks</a>
+        <a href="/top-artists?timeRange=medium_term" class="{% if time_range == 'medium_term' %}selected{% endif %}">Last 6 Months</a>
+        <a href="/top-artists?timeRange=long_term" class="{% if time_range == 'long_term' %}selected{% endif %}">All Time</a>
     </div>
-
-    
 
     <!-- Artists Grid -->
     <div class="artist-grid">

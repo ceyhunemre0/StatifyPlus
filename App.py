@@ -103,15 +103,17 @@ def before_request_func():
 
 @app.route('/top-tracks')
 def top_tracks():
-    user = session.get('user')
     access_token = session.get('access_token')
+    user = session.get('user')
     if not access_token:
-        clear_session()
-        return redirect(url_for('login'))
+        return redirect('/login')
+
+    time_range = request.args.get('timeRange', 'short_term')
+    limit = 20  # Limit her zaman 20
 
     headers = {'Authorization': f'Bearer {access_token}'}
     response = requests.get(
-        "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10&offset=0",
+        f"https://api.spotify.com/v1/me/top/tracks?time_range={time_range}&limit={limit}",
         headers=headers
     )
 
@@ -122,21 +124,23 @@ def top_tracks():
     if response.status_code == 200:
         data = response.json()
         tracks = data['items']
-        return render_template('top_tracks.html', tracks=tracks, user=user)
+        return render_template('top_tracks.html', tracks=tracks, user=user, time_range=time_range)
     else:
         return f"Failed to fetch top tracks: {response.text}", response.status_code
 
 @app.route('/top-artists')
 def top_artists():
-    user = session.get('user')
     access_token = session.get('access_token')
+    user = session.get('user')
     if not access_token:
-        clear_session()
-        return redirect(url_for('login'))
+        return redirect('/login')
+
+    time_range = request.args.get('timeRange', 'short_term')
+    limit = 20  # Limit her zaman 20
 
     headers = {'Authorization': f'Bearer {access_token}'}
     response = requests.get(
-        "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=10&offset=0",
+        f"https://api.spotify.com/v1/me/top/artists?time_range={time_range}&limit={limit}",
         headers=headers
     )
 
@@ -147,7 +151,7 @@ def top_artists():
     if response.status_code == 200:
         data = response.json()
         artists = data['items']
-        return render_template('top_artists.html', artists=artists, user=user)
+        return render_template('top_artists.html', artists=artists, user=user, time_range=time_range)
     else:
         return f"Failed to fetch top artists: {response.text}", response.status_code
 
