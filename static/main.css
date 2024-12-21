@@ -1,24 +1,27 @@
+/* Genel Ayarlar */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
-    color: #ffffff;
+    background-color: #FCFFFC; /* Çok açık beyaz */
+    color: #040F0F; /* Çok koyu yeşil */
 }
 
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: #1db954;
-    color: white;
+    background-color: #040F0F; /* Çok koyu yeşil */
+    color: #FCFFFC; /* Çok açık beyaz */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .brand {
     font-size: 24px;
     font-weight: bold;
+    color: #2BA84A; /* Orta yeşil */
 }
 
 .nav-links {
@@ -28,7 +31,7 @@ body {
 
 .nav-link {
     text-decoration: none;
-    color: white;
+    color: #FCFFFC; /* Çok açık beyaz */
     font-size: 18px;
     padding: 5px 10px;
     border-radius: 5px;
@@ -36,38 +39,47 @@ body {
 }
 
 .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: #248232; /* Canlı yeşil */
 }
 
-/* Profil Menüsü */
+/* Profil Butonu */
 .profile-container {
     position: relative;
 }
 
 .profile-btn {
-    background: none;
-    border: none;
-    color: white;
+    background: #2D3A3A; /* Koyu gri-yeşil */
+    border: 2px solid #248232; /* Canlı yeşil çerçeve */
+    color: #FCFFFC; /* Çok açık beyaz */
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 18px;
+    padding: 5px 15px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
 }
 
 .profile-btn img {
-    width: 35px; /* Profil fotoğrafı boyutu */
+    width: 35px;
     height: 35px;
     border-radius: 50%;
 }
 
+.profile-btn:hover {
+    background-color: #248232; /* Canlı yeşil */
+    color: #FCFFFC; /* Beyaz */
+}
+
+/* Dropdown Menü */
 .language-dropdown {
     display: none;
     position: absolute;
     top: 50px;
     right: 0;
-    background-color: white;
-    color: black;
+    background-color: #FCFFFC; /* Beyaz */
+    color: #040F0F; /* Çok koyu yeşil */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     overflow: hidden;
@@ -87,7 +99,7 @@ body {
 }
 
 .language-dropdown div:hover {
-    background-color: #f1f1f1;
+    background-color: #F1F1F1;
 }
 
 .language-dropdown img {
@@ -95,10 +107,12 @@ body {
     margin-right: 10px;
 }
 
+/* Hero Bölümü */
 .hero {
     text-align: center;
     padding: 50px 20px;
-    background-color: #1db954;
+    background-color: #248232; /* Canlı yeşil */
+    color: #FCFFFC; /* Çok açık beyaz */
 }
 
 .hero h1 {
@@ -113,8 +127,8 @@ body {
 .cta-btn {
     margin-top: 20px;
     padding: 12px 30px;
-    background-color: #ffffff;
-    color: #1db954;
+    background-color: #2BA84A; /* Orta yeşil */
+    color: #FCFFFC; /* Çok açık beyaz */
     border-radius: 25px;
     text-decoration: none;
     font-weight: 600;
@@ -122,22 +136,25 @@ body {
 }
 
 .cta-btn:hover {
-    background-color: #18a148;
+    background-color: #248232; /* Canlı yeşil */
 }
 
+/* İstatistikler Bölümü */
 .stats {
     max-width: 1100px;
     margin: 40px auto;
     padding: 20px;
-    background-color: #181818;
+    background-color: #2D3A3A; /* Koyu gri-yeşil */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    color: #FCFFFC; /* Çok açık beyaz */
 }
 
 .stats h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 20px;
+    color: #248232; /* Canlı yeşil */
 }
 
 .stats-container {
@@ -154,7 +171,7 @@ body {
 
 .stat-item h3 {
     font-size: 1.8rem;
-    color: #1db954;
+    color: #2BA84A; /* Orta yeşil */
 }
 
 .stat-item ul {
@@ -163,39 +180,24 @@ body {
 }
 
 .stat-item ul li {
-    background-color: #282828;
+    background-color: #040F0F; /* Çok koyu yeşil */
     margin: 10px 0;
     padding: 15px;
     border-radius: 8px;
     font-size: 1.2rem;
     transition: background-color 0.3s ease;
+    color: #FCFFFC; /* Çok açık beyaz */
 }
 
 .stat-item ul li:hover {
-    background-color: #3a3a3a;
+    background-color: #248232; /* Canlı yeşil */
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #181818;
-    font-size: 0.9rem;
-}
-
-a {
-    color: #ffffff; /* Metni beyaz yap */
-    text-decoration: none; /* Altını çizme */
-}
-
-a:hover {
-    color: #1db954; /* Üzerine gelindiğinde yeşil yap */
-}
-
-/* Player */
+/* Spotify Player */
 #spotify-player-section {
     margin-top: 40px;
     text-align: center;
-    background-color: #f9f9f9;
+    background-color: #F9F9F9;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -212,11 +214,53 @@ a:hover {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    background: #1db954;
-    color: white;
+    background: #2BA84A; /* Orta yeşil */
+    color: #FCFFFC; /* Beyaz */
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
     font-weight: bold;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #040F0F; /* Çok koyu yeşil */
+    font-size: 0.9rem;
+    color: #FCFFFC; /* Çok açık beyaz */
+}
+
+footer a {
+    color: #248232; /* Canlı yeşil */
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #2BA84A; /* Orta yeşil */
+}
+
+/* "For More" Linkleri */
+.more-link {
+    display: inline-block; /* Buton gibi görünmesi için */
+    padding: 10px 20px; /* İç boşluk */
+    background-color: #248232; /* Canlı yeşil */
+    color: #FCFFFC; /* Beyaz */
+    text-decoration: none; /* Alt çizgi kaldırılır */
+    font-size: 1rem; /* Boyut */
+    font-weight: bold; /* Kalın yazı */
+    border-radius: 25px; /* Yuvarlatılmış kenarlar */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.more-link:hover {
+    background-color: #2BA84A; /* Orta yeşil */
+    transform: scale(1.05); /* Hover ile büyütme efekti */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Hafif gölge efekti */
+}
+
+.more-link:active {
+    background-color: #2D3A3A; /* Daha koyu renk, tıklanma efekti */
+    transform: scale(0.98); /* Hafif küçültme efekti */
 }

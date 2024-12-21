@@ -2,7 +2,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    background-color: #fcfffc; /* Paletten açık renk arka plan */
 }
 
 /* Navbar styles */
@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1db954;
+    background-color: #248232; /* Ana koyu yeşil */
     color: white;
     padding: 10px 20px;
     position: sticky;
@@ -22,6 +22,7 @@ body {
     font-size: 1.5em;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
+    color: #fcfffc; /* Açık beyaz renk */
 }
 
 .navbar .nav-links {
@@ -31,13 +32,13 @@ body {
 
 .navbar .nav-links a {
     text-decoration: none;
-    color: white;
+    color: #fcfffc; /* Beyaz renk */
     font-weight: bold;
-    transition: color 0.2s;
+    transition: color 0.2s ease;
 }
 
 .navbar .nav-links a:hover {
-    color: #f4f4f9;
+    color: #2ba84a; /* Daha canlı yeşil */
 }
 
 .navbar .profile {
@@ -51,33 +52,34 @@ body {
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
+    border: 2px solid #fcfffc; /* Profil resmi için beyaz çerçeve */
 }
 
 .navbar .profile .dropdown {
     position: absolute;
     top: 50px;
     right: 0;
-    background: white;
-    color: black;
+    background: #fcfffc; /* Açık beyaz */
+    color: #040f0f; /* Çok koyu gri/siyah */
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     display: none;
     flex-direction: column;
     padding: 10px;
-    width: 120px;
+    width: 140px;
 }
 
 .navbar .profile .dropdown a {
     text-decoration: none;
-    color: black;
+    color: #040f0f; /* Koyu gri */
     padding: 5px 10px;
     border-radius: 3px;
-    transition: background 0.2s;
+    transition: background 0.2s ease;
 }
 
 .navbar .profile .dropdown a:hover {
-    background-color: #1db954;
-    color: white;
+    background-color: #2ba84a; /* Daha canlı yeşil */
+    color: #fcfffc; /* Beyaz */
 }
 
 .navbar .profile:hover .dropdown {
@@ -86,22 +88,34 @@ body {
 
 .navbar .login-btn {
     text-decoration: none;
-    color: white;
-    background-color: #1db954;
+    color: #fcfffc; /* Beyaz */
+    background-color: #2ba84a; /* Canlı yeşil */
     padding: 10px 20px;
     border-radius: 20px;
     font-weight: bold;
-    transition: background 0.2s;
+    transition: background 0.2s ease;
 }
 
 .navbar .login-btn:hover {
-    background-color: #14873e;
+    background-color: #248232; /* Daha koyu yeşil */
 }
 
 footer {
     text-align: center;
     padding: 20px 0;
-    background-color: #1db954;
-    color: white;
+    background-color: #2d3a3a; /* Paletten koyu gri */
+    color: #fcfffc; /* Beyaz */
     margin-top: 40px;
+    font-size: 0.9em;
+}
+
+/* Genel Stil Ayarları */
+a {
+    text-decoration: none;
+    color: #248232; /* Ana yeşil */
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #2ba84a; /* Daha canlı yeşil */
 }

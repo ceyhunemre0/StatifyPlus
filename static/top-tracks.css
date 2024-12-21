@@ -1,9 +1,10 @@
 /* Genel Ayarlar */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #fcfffc; /* Açık beyaz arka plan */
     margin: 0;
     padding: 0;
+    color: #040f0f; /* Metin rengi */
 }
 
 h1 {
@@ -11,7 +12,7 @@ h1 {
     text-align: center;
     margin-top: 20px;
     font-size: 24px;
-    color: #333;
+    color: #040f0f; /* Koyu siyah */
 }
 
 /* Zaman Aralığı ve Limit Seçimi */
@@ -27,14 +28,14 @@ h1 {
 .filter-container label {
     font-weight: bold;
     font-size: 16px;
-    color: #333;
+    color: #040f0f; /* Metin rengi */
 }
 
 .filter-container select,
 .filter-container input {
     padding: 8px 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #040f0f; /* Sınır rengi */
     border-radius: 5px;
     outline: none;
     transition: border-color 0.3s;
@@ -42,25 +43,25 @@ h1 {
 
 .filter-container select:focus,
 .filter-container input:focus {
-    border-color: #1db954;
+    border-color: #248232; /* Ana koyu yeşil */
 }
 
 .filter-container button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #1db954;
-    color: white;
-    border: none;
+    background-color: #248232; /* Ana koyu yeşil */
+    color: #fcfffc; /* Açık beyaz yazı */
+    border: 2px solid #040f0f; /* Sınır rengi */
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
 }
 
 .filter-container button:hover {
-    background-color: #14843b;
+    background-color: #040f0f; /* Koyu siyah hover */
+    color: #fcfffc; /* Açık beyaz yazı */
     transform: translateY(-2px);
 }
-
 
 /* Şarkı Listesi */
 .track-list {
@@ -76,26 +77,29 @@ h1 {
 .track-item {
     display: flex;
     align-items: center;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #040f0f;
+    border-radius: 6px;
+    background-color: #fcfffc;
     transition: box-shadow 0.3s, transform 0.2s;
     cursor: pointer;
+    max-width: 100%; /* Kartın taşmasını engeller */
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .track-item:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transform: scale(1.03);
+    box-shadow: 0 2px 6px rgba(4, 15, 15, 0.15);
+    transform: scale(1.02);
 }
 
 /* Sıra Numarası */
 .track-rank {
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bold;
     width: 30px;
     text-align: center;
-    color: #1db954;
+    color: #248232;
 }
 
 /* Şarkı Detayları */
@@ -104,12 +108,13 @@ h1 {
     align-items: center;
     gap: 15px;
     flex-grow: 1;
+    overflow: hidden; /* Taşmayı önlemek için */
 }
 
 /* Şarkı Görseli */
 .track-image {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 4px;
     object-fit: cover;
 }
@@ -117,48 +122,57 @@ h1 {
 /* Şarkı Bilgisi */
 .track-info {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: 20px;
+    overflow: hidden;
 }
 
+/* Şarkı Başlığı */
 .track-title {
-    font-size: 1.1em;
-    margin: 0;
-    color: #333;
+    font-size: 0.9em;
+    font-weight: normal;
+    color: #040f0f;
+    width: 30%; /* Daha dar genişlik ayarı */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.track-title a {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.2s;
+/* Sanatçı Adı */
+.track-artist {
+    font-size: 0.9em;
+    color: #2d3a3a;
+    width: 25%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.track-title a:hover {
-    color: #1db954;
-}
-
-.track-artist,
+/* Albüm Adı */
 .track-album {
     font-size: 0.9em;
-    color: #666;
+    color: #2d3a3a;
+    width: 25%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Şarkı Süresi */
 .track-duration {
-    font-size: 0.9em;
+    font-size: 0.85em;
     font-weight: bold;
-    color: #333;
+    color: #040f0f;
     text-align: right;
     width: 60px;
+    flex-shrink: 0; /* Taşmayı engeller */
 }
 
 /* Medya Sorguları */
 @media (max-width: 768px) {
-    .filter-container {
-        flex-direction: column;
-        gap: 10px;
-    }
-
     .track-item {
         flex-direction: column;
         align-items: flex-start;
@@ -181,15 +195,26 @@ h1 {
     }
 }
 
+.track-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.track-link:hover {
+    transform: scale(1.02);
+}
+
 /* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: #1db954;
-    color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #248232; /* Ana koyu yeşil */
+    color: #fcfffc; /* Açık beyaz yazı */
+    box-shadow: 0px 4px 6px rgba(4, 15, 15, 0.1); /* Koyu siyah ton */
 }
 
 .navbar .brand {
@@ -204,7 +229,7 @@ h1 {
 
 .nav-link {
     text-decoration: none;
-    color: white;
+    color: #fcfffc; /* Açık beyaz yazı */
     font-size: 18px;
     padding: 5px 10px;
     border-radius: 5px;
@@ -212,7 +237,7 @@ h1 {
 }
 
 .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: #2d3a3a; /* Koyu ton hover */
 }
 
 /* Profil Menüsü */
@@ -263,7 +288,7 @@ h1 {
 }
 
 .language-dropdown div:hover {
-    background-color: #f1f1f1;
+    background-color: #f4f4f9;
 }
 
 .language-dropdown img {
@@ -274,51 +299,52 @@ h1 {
 /* Zaman Aralığı Seçici */
 .time-range-selector {
     display: flex;
-    justify-content: center;  /* Yatayda ortalama */
-    align-items: center;      /* Dikeyde ortalama */
-    gap: 15px;                /* Linkler arası boşluk */
-    margin: 20px 0;           /* Üst ve alt boşluk */
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
 }
 
 .time-range-selector a {
-    padding: 10px 20px;       /* İç boşluk */
-    font-size: 16px;          /* Yazı boyutu */
-    text-decoration: none;    /* Alt çizgi kaldır */
-    color: #1db954;           /* Yazı rengi */
-    border: 2px solid #1db954; /* Kenar çizgisi */
-    border-radius: 5px;       /* Köşeleri yuvarla */
-    background-color: white;  /* Arka plan rengi */
-    font-weight: 600;         /* Yazıyı kalın yap */
-    transition: all 0.3s ease; /* Geçiş efekti */
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #1db954;
+    border: 2px solid #1db954;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .time-range-selector a:hover {
-    background-color: #1db954; /* Hover durumunda arka plan */
-    color: white;              /* Hover durumunda yazı rengi */
+    background-color: #1db954;
+    color: white;
 }
 
 .time-range-selector a.selected {
-    background-color: #1db954; /* Seçili durumda arka plan */
-    color: white;              /* Seçili durumda yazı rengi */
-    font-weight: bold;         /* Seçili durumda kalın yazı */
+    background-color: #1db954;
+    color: white;
+    font-weight: bold;
 }
 
 @media (max-width: 768px) {
     .time-range-selector {
-        flex-direction: column; /* Mobilde dikey hizala */
-        gap: 10px;              /* Boşlukları küçült */
+        flex-direction: column;
+        gap: 10px;
     }
 
     .time-range-selector a {
-        width: 100%;             /* Linkleri tam genişlik yap */
-        text-align: center;       /* Metni ortala */
+        width: 100%;
+        text-align: center;
     }
 }
 
-
+/* Footer */
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #181818;
+    background-color: #2d3a3a; /* Footer koyu tonu */
+    color: #fcfffc; /* Açık beyaz yazı */
     font-size: 0.9rem;
 }

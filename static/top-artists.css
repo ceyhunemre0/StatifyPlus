@@ -3,29 +3,31 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e0e0e0;
+    background-color: #fcfffc; /* Açık beyaz renk */
 }
 
 h1 {
     text-align: center;
     margin-top: 20px;
     font-size: 24px;
-    color: #333;
+    color: #040f0f; /* Koyu siyah/gri */
 }
 
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: #1db954;
-    color: white;
+    background-color: #248232; /* Ana koyu yeşil */
+    color: #fcfffc; /* Beyaz */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .brand {
     font-size: 24px;
     font-weight: bold;
+    color: #fcfffc; /* Beyaz */
 }
 
 .nav-links {
@@ -35,7 +37,7 @@ h1 {
 
 .nav-link {
     text-decoration: none;
-    color: white;
+    color: #fcfffc; /* Beyaz */
     font-size: 18px;
     padding: 5px 10px;
     border-radius: 5px;
@@ -54,7 +56,7 @@ h1 {
 .profile-btn {
     background: none;
     border: none;
-    color: white;
+    color: #fcfffc; /* Beyaz */
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -73,8 +75,8 @@ h1 {
     position: absolute;
     top: 50px;
     right: 0;
-    background-color: white;
-    color: black;
+    background-color: #fcfffc; /* Beyaz */
+    color: #040f0f; /* Çok koyu gri/siyah */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     overflow: hidden;
@@ -103,35 +105,34 @@ h1 {
 }
 
 /* Zaman Aralığı Seçici */
-/* Zaman Aralığı Seçici */
 .time-range-selector {
     display: flex;
     justify-content: center;  /* Yatayda ortalama */
     align-items: center;      /* Dikeyde ortalama */
     gap: 15px;                /* Linkler arası boşluk */
-    margin: 20px 0;        /* Üst ve alt boşluk */
+    margin: 20px 0;           /* Üst ve alt boşluk */
 }
 
 .time-range-selector a {
     padding: 10px 20px;       /* İç boşluk */
     font-size: 16px;          /* Yazı boyutu */
     text-decoration: none;    /* Alt çizgi kaldır */
-    color: #1db954;           /* Yazı rengi */
-    border: 2px solid #1db954; /* Kenar çizgisi */
+    color: #248232;           /* Ana yeşil */
+    border: 2px solid #248232; /* Kenar çizgisi */
     border-radius: 5px;       /* Köşeleri yuvarla */
-    background-color: #f5f5f5;  /* Arka plan rengi */
+    background-color: #fcfffc; /* Açık beyaz */
     font-weight: 600;         /* Yazıyı kalın yap */
     transition: all 0.3s ease; /* Geçiş efekti */
 }
 
 .time-range-selector a:hover {
-    background-color: #1db954; /* Hover durumunda arka plan */
-    color: white;              /* Hover durumunda yazı rengi */
+    background-color: #248232; /* Hover durumunda arka plan */
+    color: #fcfffc;            /* Hover durumunda yazı rengi */
 }
 
 .time-range-selector a.selected {
-    background-color: #1db954; /* Seçili durumda arka plan */
-    color: white;              /* Seçili durumda yazı rengi */
+    background-color: #248232; /* Seçili durumda arka plan */
+    color: #fcfffc;            /* Seçili durumda yazı rengi */
     font-weight: bold;         /* Seçili durumda kalın yazı */
 }
 
@@ -147,7 +148,6 @@ h1 {
     }
 }
 
-
 /* Sanatçı Grid */
 .artist-grid {
     display: grid;
@@ -162,7 +162,7 @@ h1 {
     display: block;
     text-decoration: none;
     color: inherit;
-    background: white;
+    background: #fcfffc; /* Beyaz */
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
@@ -185,7 +185,7 @@ h1 {
 
 .artist-card h3 {
     font-size: 20px;
-    color: #333;
+    color: #040f0f; /* Çok koyu siyah */
     margin: 15px 0 0 0;
 }
 
@@ -193,6 +193,7 @@ h1 {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #181818;
+    background-color: #2d3a3a; /* Paletten koyu gri */
     font-size: 0.9rem;
+    color: #fcfffc; /* Beyaz */
 }

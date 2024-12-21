@@ -49,25 +49,24 @@
         </div>
     </header>
 
-    <!-- Track List -->
     <div class="track-list">
         {% for track in tracks %}
-        <div class="track-item">
-            <div class="track-rank">{{ loop.index }}</div>
-            <div class="track-details">
-                <img src="{{ track['album']['images'][1]['url'] }}" alt="{{ track['name'] }}" class="track-image">
-                <div class="track-info">
-                    <h3 class="track-title">
-                        <a href="{{ track['external_urls']['spotify'] }}" target="_blank">{{ track['name'] }}</a>
-                    </h3>
-                    <p class="track-artist">{{ track['artists'][0]['name'] }}</p>
-                    <p class="track-album">{{ track['album']['name'] }}</p>
+        <a href="{{ track['external_urls']['spotify'] }}" target="_blank" class="track-link">
+            <div class="track-item">
+                <div class="track-rank">{{ loop.index }}</div>
+                <div class="track-details">
+                    <img src="{{ track['album']['images'][1]['url'] }}" alt="{{ track['name'] }}" class="track-image">
+                    <div class="track-info">
+                        <h3 class="track-title">{{ track['name'] }}</h3>
+                        <p class="track-artist">{{ track['artists'][0]['name'] }}</p>
+                        <p class="track-album">{{ track['album']['name'] }}</p>
+                    </div>
+                </div>
+                <div class="track-duration">
+                    {{ track['duration_ms'] | format_duration }}
                 </div>
             </div>
-            <div class="track-duration">
-                {{ track['duration_ms'] | format_duration }}
-            </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 
