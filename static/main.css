@@ -190,3 +190,33 @@ a {
 a:hover {
     color: #1db954; /* Üzerine gelindiğinde yeşil yap */
 }
+
+/* Player */
+#spotify-player-section {
+    margin-top: 40px;
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#spotify-player-section h2 {
+    font-size: 2rem;
+    color: #121212;
+    margin-bottom: 20px;
+}
+
+#player {
+    height: 80px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background: #1db954;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-weight: bold;
+}

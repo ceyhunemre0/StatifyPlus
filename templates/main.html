@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="/static/main.css">
 
 </head>
+
 <body>
     <nav class="navbar">
         <div class="brand">Stats for Spotify</div>
@@ -32,7 +34,7 @@
             </div>
         </div>
     </nav>
-    
+
     <!-- Main Content -->
     <main>
         <section class="hero">
@@ -48,8 +50,9 @@
                     <ul>
                         {% for track in top_tracks %}
                         <li onclick="window.open('{{ track.url }}', '_blank')">
-                                <img src="{{ track.image }}" alt="{{ track.name }}" style="width: 50px; height: 50px; vertical-align: middle; border-radius: 5px;">
-                                {{ track.name }}
+                            <img src="{{ track.image }}" alt="{{ track.name }}"
+                                style="width: 50px; height: 50px; vertical-align: middle; border-radius: 5px;">
+                            {{ track.name }}
                             </a>
                         </li>
                         {% else %}
@@ -63,8 +66,9 @@
                     <ul>
                         {% for artist in top_artists %}
                         <li onclick="window.open('{{ artist.url }}', '_blank')">
-                                <img src="{{ artist.image }}" alt="{{ artist.name }}" style="width: 50px; height: 50px; vertical-align: middle; border-radius: 5px;">
-                                {{ artist.name }}
+                            <img src="{{ artist.image }}" alt="{{ artist.name }}"
+                                style="width: 50px; height: 50px; vertical-align: middle; border-radius: 5px;">
+                            {{ artist.name }}
                             </a>
                         </li>
                         {% else %}
@@ -75,6 +79,11 @@
                 </div>
             </div>
         </section>
+        <section id="spotify-player-section">
+            <h2>Spotify Player</h2>
+            <div id="player"></div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -83,4 +92,36 @@
     </footer>
 </body>
 <script src="/static/main.js"></script>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+<script>
+    window.onSpotifyWebPlaybackSDKReady = () => {
+        const token = "{{ access_token }}";
+        const player = new Spotify.Player({
+            name: 'Web Playback SDK Player',
+            getOAuthToken: cb => { cb(token); },
+            volume: 0.5
+        });
+
+        // Error handling
+        player.addListener('initialization_error', ({ message }) => { console.error(message); });
+        player.addListener('authentication_error', ({ message }) => { console.error(message); });
+        player.addListener('account_error', ({ message }) => { console.error(message); });
+        player.addListener('playback_error', ({ message }) => { console.error(message); });
+
+        // Ready
+        player.addListener('ready', ({ device_id }) => {
+            console.log('Ready with Device ID', device_id);
+            // You can transfer playback to this device using Spotify Web API
+        });
+
+        // Not Ready
+        player.addListener('not_ready', ({ device_id }) => {
+            console.log('Device ID has gone offline', device_id);
+        });
+
+        // Connect to the player!
+        player.connect();
+    };
+</script>
+
 </html>

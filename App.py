@@ -78,7 +78,7 @@ def home():
         top_tracks = []
         top_artists = []
 
-    return render_template('main.html', user=user, top_tracks=top_tracks, top_artists=top_artists)
+    return render_template('main.html', user=user, top_tracks=top_tracks, top_artists=top_artists, access_token=access_token)
 
 @app.route('/welcome')
 def welcome():
