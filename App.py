@@ -45,8 +45,40 @@ def format_duration(ms):
 
 @app.route('/')
 def home():
-    user = session.get('user')  # Oturumda kullanıcı bilgilerini alın
-    return render_template('main.html', user=user)  # main.html'e user'ı gönderin
+    user = session.get('user')
+    access_token = session.get('access_token')
+
+    if access_token:
+        headers = {'Authorization': f'Bearer {access_token}'}
+
+        # Top Tracks
+        tracks_response = requests.get("https://api.spotify.com/v1/me/top/tracks?limit=3", headers=headers)
+        if tracks_response.status_code == 200:
+            tracks_data = tracks_response.json()
+            top_tracks = [{
+                'name': track['name'],
+                'image': track['album']['images'][0]['url'],
+                'url': track['external_urls']['spotify']
+            } for track in tracks_data['items']]
+        else:
+            top_tracks = []
+
+        # Top Artists
+        artists_response = requests.get("https://api.spotify.com/v1/me/top/artists?limit=3", headers=headers)
+        if artists_response.status_code == 200:
+            artists_data = artists_response.json()
+            top_artists = [{
+                'name': artist['name'],
+                'image': artist['images'][0]['url'] if artist['images'] else '',
+                'url': artist['external_urls']['spotify']
+            } for artist in artists_data['items']]
+        else:
+            top_artists = []
+    else:
+        top_tracks = []
+        top_artists = []
+
+    return render_template('main.html', user=user, top_tracks=top_tracks, top_artists=top_artists)
 
 @app.route('/welcome')
 def welcome():

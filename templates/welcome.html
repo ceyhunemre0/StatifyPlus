@@ -4,16 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stats For Spotify - Home</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/static/main.css">
-    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #1db954;
+        }
+
+        .navbar .brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .navbar .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .navbar .profile span,
+        .navbar .login-btn {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #1db954;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .cta-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #ffffff;
+            color: #1db954;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: #18a148;
+        }
+
+        .stats {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #181818;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .stats h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            margin: 20px;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .stat-item h3 {
+            font-size: 1.8rem;
+            color: #1db954;
+        }
+
+        .stat-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .stat-item ul li {
+            background-color: #282828;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-item ul li:hover {
+            background-color: #3a3a3a;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #181818;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="brand">Tops For Spotify</div>
         <div class="nav-links">
-            <a href="/">Home Page</a>
+            <a href="/">Home</a>
             <a href="/top-tracks">Top Tracks</a>
             <a href="/top-artists">Top Artists</a>
         </div>
@@ -27,33 +154,23 @@
         <section class="hero">
             <h1>Welcome to Tops For Spotify</h1>
             <p>Explore your most-streamed songs, artists, and more.</p>
+            <br>
+            <a href="/login" class="cta-btn">Get Started</a>
         </section>
 
         <section class="stats">
             <h2>Your Top Stats</h2>
             <div class="stats-container">
                 <div class="stat-item">
-                    <h3>Top Songs</h3>
+                    <h3>Top Tracks</h3>
                     <ul>
-                        <li>Song 1</li>
-                        <li>Song 2</li>
-                        <li>Song 3</li>
+                        <li onclick="window.location.href='/login'">Please login</li>
                     </ul>
                 </div>
                 <div class="stat-item">
                     <h3>Top Artists</h3>
                     <ul>
-                        <li>Artist 1</li>
-                        <li>Artist 2</li>
-                        <li>Artist 3</li>
-                    </ul>
-                </div>
-                <div class="stat-item">
-                    <h3>Top Genres</h3>
-                    <ul>
-                        <li>Genre 1</li>
-                        <li>Genre 2</li>
-                        <li>Genre 3</li>
+                        <li onclick="window.location.href='/login'">Please login</li>
                     </ul>
                 </div>
             </div>

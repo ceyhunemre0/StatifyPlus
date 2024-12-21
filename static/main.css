@@ -125,3 +125,12 @@ footer {
     background-color: #181818;
     font-size: 0.9rem;
 }
+
+a {
+    color: #ffffff; /* Metni beyaz yap */
+    text-decoration: none; /* Altını çizme */
+}
+
+a:hover {
+    color: #1db954; /* Üzerine gelindiğinde yeşil yap */
+}
