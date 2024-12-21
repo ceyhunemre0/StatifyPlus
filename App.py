@@ -23,7 +23,7 @@ endpoint = "https://api.spotify.com/v1/me"
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
 
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(seconds=15)
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
 @app.template_filter('format_duration')
 def format_duration(ms):
