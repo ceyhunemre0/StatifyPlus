@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stats For Spotify - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/static/main.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="brand">Tops For Spotify</div>
+        <div class="nav-links">
+            <a href="/">Home Page</a>
+            <a href="/top-tracks">Top Tracks</a>
+            <a href="/top-artists">Top Artists</a>
+        </div>
+        <div class="profile">
+            {% if user %}
+            <img src="{{ user.profile_image }}" alt="{{ user.display_name }}">
+            <span>{{ user.display_name }}</span>
+            {% else %}
+            <a href="/login" class="login-btn">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <section class="hero">
+            <h1>Welcome to Tops For Spotify</h1>
+            <p>Explore your most-streamed songs, artists, and more.</p>
+        </section>
+
+        <section class="stats">
+            <h2>Your Top Stats</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <h3>Top Songs</h3>
+                    <ul>
+                        <li>Song 1</li>
+                        <li>Song 2</li>
+                        <li>Song 3</li>
+                    </ul>
+                </div>
+                <div class="stat-item">
+                    <h3>Top Artists</h3>
+                    <ul>
+                        <li>Artist 1</li>
+                        <li>Artist 2</li>
+                        <li>Artist 3</li>
+                    </ul>
+                </div>
+                <div class="stat-item">
+                    <h3>Top Genres</h3>
+                    <ul>
+                        <li>Genre 1</li>
+                        <li>Genre 2</li>
+                        <li>Genre 3</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Stats For Spotify. All rights reserved.</p>
+    </footer>
+</body>
+</html>

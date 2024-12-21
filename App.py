@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, session, jsonify, render_template, url_for
+from flask import Flask, request, redirect, session, render_template, url_for
 import requests
 import base64
 from dotenv import load_dotenv
@@ -22,8 +22,17 @@ endpoint = "https://api.spotify.com/v1/me"
 # Flask uygulamasını oluştur
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
-
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
+
+def clear_session():
+    session.pop('access_token', None)
+    session.pop('refresh_token', None)
+    session.pop('user', None)
+
+@app.before_request
+def before_request_func():
+    if 'access_token' not in session and request.endpoint not in ('login', 'callback', 'home'):
+        return redirect(url_for(''))
 
 @app.template_filter('format_duration')
 def format_duration(ms):
@@ -31,16 +40,10 @@ def format_duration(ms):
     seconds = (ms % 60000) // 1000
     return f"{minutes}:{seconds:02d}"
 
-@app.template_filter('format_number')
-def format_number(value):
-    try:
-        return f"{value:,}"
-    except (ValueError, TypeError):
-        return value
-
 @app.route('/')
 def home():
-    return render_template('home.html')
+    user = session.get('user')  # Oturumda kullanıcı bilgilerini alın
+    return render_template('main.html', user=user)  # main.html'e user'ı gönderin
 
 @app.route('/login')
 def login():
@@ -89,24 +92,12 @@ def callback():
     else:
         return render_template('callback.html', success=False)
 
-def clear_session():
-    # Oturum verilerini temizle
-    session.pop('access_token', None)
-    session.pop('refresh_token', None)
-    session.pop('user', None)
-
-@app.before_request
-def before_request_func():
-    # Her istekten önce oturumu kontrol et
-    if 'access_token' not in session and request.endpoint not in ('login', 'callback', 'home'):
-        return redirect(url_for('home'))
-
 @app.route('/top-tracks')
 def top_tracks():
     access_token = session.get('access_token')
     user = session.get('user')
     if not access_token:
-        return redirect('/login')
+        return redirect(url_for('login'))
 
     time_range = request.args.get('timeRange', 'short_term')
     limit = 20  # Limit her zaman 20
@@ -119,7 +110,7 @@ def top_tracks():
 
     if response.status_code == 401:  # Unauthorized
         clear_session()
-        return redirect(url_for('login'))
+        return redirect(url_for(''))
 
     if response.status_code == 200:
         data = response.json()
@@ -133,7 +124,7 @@ def top_artists():
     access_token = session.get('access_token')
     user = session.get('user')
     if not access_token:
-        return redirect('/login')
+        return redirect(url_for('login'))
 
     time_range = request.args.get('timeRange', 'short_term')
     limit = 20  # Limit her zaman 20
@@ -146,7 +137,7 @@ def top_artists():
 
     if response.status_code == 401:  # Unauthorized
         clear_session()
-        return redirect(url_for('login'))
+        return redirect(url_for(''))
 
     if response.status_code == 200:
         data = response.json()
