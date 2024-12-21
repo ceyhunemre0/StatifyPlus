@@ -2,7 +2,7 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #121212;
+    background-color: #ffffff;
     color: #ffffff;
 }
 
@@ -10,33 +10,89 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 15px 20px;
     background-color: #1db954;
+    color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .brand {
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: bold;
 }
 
-.navbar .nav-links a {
-    margin: 0 10px;
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
     text-decoration: none;
-    color: #ffffff;
-    font-weight: 600;
+    color: white;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.navbar .profile img {
-    width: 40px;
-    height: 40px;
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Profil Menüsü */
+.profile-container {
+    position: relative;
+}
+
+.profile-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+}
+
+.profile-btn img {
+    width: 35px; /* Profil fotoğrafı boyutu */
+    height: 35px;
     border-radius: 50%;
-    margin-right: 10px;
 }
 
-.navbar .profile span,
-.navbar .login-btn {
-    color: #ffffff;
-    font-weight: 600;
+.language-dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    color: black;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1000;
+    width: 200px;
+}
+
+.language-dropdown.active {
+    display: block;
+}
+
+.language-dropdown div {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.language-dropdown div:hover {
+    background-color: #f1f1f1;
+}
+
+.language-dropdown img {
+    width: 20px;
+    margin-right: 10px;
 }
 
 .hero {

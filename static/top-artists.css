@@ -1,60 +1,163 @@
-/* Başlık */
-h1 {
+/* Genel Stillendirme */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+h1 {
     text-align: center;
     margin-top: 20px;
     font-size: 24px;
     color: #333;
 }
 
-/* Zaman aralığı ve limit seçimi */
-.filter-container {
+.navbar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    margin: 20px auto;
-    gap: 15px;
-}
-
-.filter-container label {
-    font-weight: bold;
-    font-size: 16px;
-    color: #333;
-}
-
-.filter-container select,
-.filter-container input {
-    padding: 8px 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.filter-container button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 15px 20px;
     background-color: #1db954;
     color: white;
-    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 5px 10px;
     border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Profil Menüsü */
+.profile-container {
+    position: relative;
+}
+
+.profile-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+}
+
+.profile-btn img {
+    width: 35px; /* Profil fotoğrafı boyutu */
+    height: 35px;
+    border-radius: 50%;
+}
+
+.language-dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    color: black;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1000;
+    width: 200px;
+}
+
+.language-dropdown.active {
+    display: block;
+}
+
+.language-dropdown div {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
     cursor: pointer;
 }
 
-.filter-container button:hover {
-    background-color: #14843b;
+.language-dropdown div:hover {
+    background-color: #f1f1f1;
 }
 
-/* Sanatçı kartlarının gridi */
+.language-dropdown img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+/* Zaman Aralığı Seçici */
+/* Zaman Aralığı Seçici */
+.time-range-selector {
+    display: flex;
+    justify-content: center;  /* Yatayda ortalama */
+    align-items: center;      /* Dikeyde ortalama */
+    gap: 15px;                /* Linkler arası boşluk */
+    margin: 20px 0;           /* Üst ve alt boşluk */
+}
+
+.time-range-selector a {
+    padding: 10px 20px;       /* İç boşluk */
+    font-size: 16px;          /* Yazı boyutu */
+    text-decoration: none;    /* Alt çizgi kaldır */
+    color: #1db954;           /* Yazı rengi */
+    border: 2px solid #1db954; /* Kenar çizgisi */
+    border-radius: 5px;       /* Köşeleri yuvarla */
+    background-color: white;  /* Arka plan rengi */
+    font-weight: 600;         /* Yazıyı kalın yap */
+    transition: all 0.3s ease; /* Geçiş efekti */
+}
+
+.time-range-selector a:hover {
+    background-color: #1db954; /* Hover durumunda arka plan */
+    color: white;              /* Hover durumunda yazı rengi */
+}
+
+.time-range-selector a.selected {
+    background-color: #1db954; /* Seçili durumda arka plan */
+    color: white;              /* Seçili durumda yazı rengi */
+    font-weight: bold;         /* Seçili durumda kalın yazı */
+}
+
+@media (max-width: 768px) {
+    .time-range-selector {
+        flex-direction: column; /* Mobilde dikey hizala */
+        gap: 10px;              /* Boşlukları küçült */
+    }
+
+    .time-range-selector a {
+        width: 100%;             /* Linkleri tam genişlik yap */
+        text-align: center;       /* Metni ortala */
+    }
+}
+
+
+/* Sanatçı Grid */
 .artist-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Kart boyutu artırıldı */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
-    max-width: 1400px; /* Konteyner genişliği artırıldı */
+    max-width: 1400px;
     margin: 30px auto;
     padding: 20px;
 }
 
-/* Sanatçı kartları */
 .artist-card {
     display: block;
     text-decoration: none;
@@ -62,28 +165,34 @@ h1 {
     background: white;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); /* Daha belirgin gölge */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     text-align: center;
-    padding: 30px; /* İç alan genişletildi */
+    padding: 30px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .artist-card:hover {
-    transform: scale(1.1); /* Daha belirgin büyütme */
+    transform: scale(1.1);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Sanatçı resimleri */
 .artist-card img {
-    width: 200px; /* Resimler büyütüldü */
+    width: 200px;
     height: 200px;
     object-fit: cover;
     margin-bottom: 20px;
 }
 
-/* Sanatçı isimleri */
 .artist-card h3 {
-    font-size: 20px; /* Yazı boyutu büyütüldü */
+    font-size: 20px;
     color: #333;
     margin: 15px 0 0 0;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #181818;
+    font-size: 0.9rem;
 }

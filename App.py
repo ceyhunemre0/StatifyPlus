@@ -163,6 +163,8 @@ def top_tracks():
 def top_artists():
     access_token = session.get('access_token')
     user = session.get('user')
+    current_language = session.get('current_language', 'en')
+
     if not access_token:
         return redirect(url_for('welcome'))
 
@@ -182,7 +184,7 @@ def top_artists():
     if response.status_code == 200:
         data = response.json()
         artists = data['items']
-        return render_template('top_artists.html', artists=artists, user=user, time_range=time_range)
+        return render_template('top_artists.html', artists=artists, user=user, time_range=time_range, current_language=current_language)
     else:
         return f"Failed to fetch top artists: {response.text}", response.status_code
     
@@ -190,6 +192,14 @@ def top_artists():
 def logout():
     clear_session()
     return redirect(url_for('welcome'))
+
+@app.route('/set_language/<lang>')
+def set_language(lang):
+    if lang in ['en', 'tr']:
+        session['current_language'] = lang
+    return redirect(request.referrer or url_for('home'))
+
+
 
 if __name__ == '__main__':
     app.run(port=8888)

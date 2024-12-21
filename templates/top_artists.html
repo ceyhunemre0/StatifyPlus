@@ -1,59 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top Artists</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="/static/top-artists.css">
-    <style>
-        .time-range-selector {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        .time-range-selector a {
-            margin: 0 10px;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: black;
-            border: 1px solid black;
-            border-radius: 5px;
-        }
-        .time-range-selector a.selected {
-            background-color: green;
-            color: white;
-            border-color: green;
-        }
-    </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="brand">Stats for Spotify</div>
         <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/top-tracks">Top Tracks</a>
-            <a href="/top-artists">Top Artists</a>
+            <a href="/" class="nav-link">Home</a>
+            <a href="/top-tracks" class="nav-link active">Top Tracks</a>
+            <a href="/top-artists" class="nav-link">Top Artists</a>
         </div>
-        {% if user %}
-        <div class="profile">
-            <img src="{{ user['profile_image'] }}" alt="{{ user['display_name'] }}">
-            <span>{{ user['display_name'] }}</span>
+        <div class="profile-container">
+            <button class="profile-btn" onclick="toggleDropdown()">
+                {% if user.profile_image %}
+                <img src="{{ user.profile_image }}" alt="{{ user.display_name }}">
+                {% endif %}
+                <span>{{ user.display_name }}</span>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <div onclick="window.location.href='/logout'">
+                    <img src="/static/icons/logout-icon.svg" alt="Logout">
+                    <span>Logout</span>
+                </div>
+            </div>
         </div>
-        {% else %}
-        <a href="/login" class="login-btn">Login</a>
-        {% endif %}
     </nav>
 
-    <h1>Top Artists</h1>
+    <h1>Your Top Artists</h1>
 
     <!-- Time Range Selector -->
     <div class="time-range-selector">
-        <a href="/top-artists?timeRange=short_term" class="{% if time_range == 'short_term' %}selected{% endif %}">Last 4 Weeks</a>
-        <a href="/top-artists?timeRange=medium_term" class="{% if time_range == 'medium_term' %}selected{% endif %}">Last 6 Months</a>
-        <a href="/top-artists?timeRange=long_term" class="{% if time_range == 'long_term' %}selected{% endif %}">All Time</a>
+        <a href="/top-artists?timeRange=short_term" 
+           class="{% if time_range == 'short_term' %}selected{% endif %}">Last 4 Weeks</a>
+        <a href="/top-artists?timeRange=medium_term" 
+           class="{% if time_range == 'medium_term' %}selected{% endif %}">Last 6 Months</a>
+        <a href="/top-artists?timeRange=long_term" 
+           class="{% if time_range == 'long_term' %}selected{% endif %}">All Time</a>
     </div>
 
     <!-- Artists Grid -->
@@ -66,8 +56,12 @@
         {% endfor %}
     </div>
 
+    <!-- Footer -->
     <footer>
-        <p>Powered by Spotify</p>
+        <p>&copy; 2023 Stats For Spotify. All rights reserved.</p>
     </footer>
+
+    <script src="/static/top-artists.js"></script>
 </body>
+
 </html>

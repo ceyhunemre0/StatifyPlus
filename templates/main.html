@@ -5,32 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stats For Spotify - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/static/main.css">
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/main.css">
+
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="brand">Stats for Spotify</div>
         <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/top-tracks">Top Tracks</a>
-            <a href="/top-artists">Top Artists</a>
+            <a href="/" class="nav-link">Home</a>
+            <a href="/top-tracks" class="nav-link active">Top Tracks</a>
+            <a href="/top-artists" class="nav-link">Top Artists</a>
         </div>
-        <div class="profile">
-            {% if user %}
-            <img src="{{ user.profile_image }}" alt="{{ user.display_name }}">
-            <span>{{ user.display_name }}</span>
-            {% else %}
-            <a href="/login" class="login-btn">Login</a>
-            {% endif %}
+        <div class="profile-container">
+            <button class="profile-btn" onclick="toggleDropdown()">
+                {% if user.profile_image %}
+                <img src="{{ user.profile_image }}" alt="{{ user.display_name }}">
+                {% endif %}
+                <span>{{ user.display_name }}</span>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <div onclick="window.location.href='/logout'">
+                    <img src="/static/icons/logout-icon.svg" alt="Logout">
+                    <span>Logout</span>
+                </div>
+            </div>
         </div>
     </nav>
-
+    
     <!-- Main Content -->
     <main>
         <section class="hero">
-            <h1>Welcome to Tops For Spotify</h1>
+            <h1>Welcome to Stats For Spotify</h1>
             <p>Explore your most-streamed songs, artists, and more.</p>
         </section>
 
@@ -76,4 +82,5 @@
         <p>&copy; 2023 Stats For Spotify. All rights reserved.</p>
     </footer>
 </body>
+<script src="/static/main.js"></script>
 </html>
