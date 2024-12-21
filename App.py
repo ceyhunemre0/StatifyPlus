@@ -31,8 +31,11 @@ def clear_session():
 
 @app.before_request
 def before_request_func():
-    if 'access_token' not in session and request.endpoint not in ('login', 'callback', 'home'):
-        return redirect(url_for(''))
+    if 'access_token' not in session and request.endpoint not in ('login', 'callback', 'welcome'):
+        return redirect(url_for('welcome'))
+    elif 'access_token' in session and request.endpoint == 'welcome':
+        return redirect(url_for('home'))
+
 
 @app.template_filter('format_duration')
 def format_duration(ms):
@@ -44,6 +47,11 @@ def format_duration(ms):
 def home():
     user = session.get('user')  # Oturumda kullanıcı bilgilerini alın
     return render_template('main.html', user=user)  # main.html'e user'ı gönderin
+
+@app.route('/welcome')
+def welcome():
+    return render_template('welcome.html') 
+
 
 @app.route('/login')
 def login():
@@ -97,7 +105,7 @@ def top_tracks():
     access_token = session.get('access_token')
     user = session.get('user')
     if not access_token:
-        return redirect(url_for('login'))
+        return redirect(url_for('welcome'))
 
     time_range = request.args.get('timeRange', 'short_term')
     limit = 20  # Limit her zaman 20
@@ -124,7 +132,7 @@ def top_artists():
     access_token = session.get('access_token')
     user = session.get('user')
     if not access_token:
-        return redirect(url_for('login'))
+        return redirect(url_for('welcome'))
 
     time_range = request.args.get('timeRange', 'short_term')
     limit = 20  # Limit her zaman 20
@@ -145,6 +153,11 @@ def top_artists():
         return render_template('top_artists.html', artists=artists, user=user, time_range=time_range)
     else:
         return f"Failed to fetch top artists: {response.text}", response.status_code
+    
+@app.route('/logout')
+def logout():
+    clear_session()
+    return redirect(url_for('welcome'))
 
 if __name__ == '__main__':
     app.run(port=8888)
