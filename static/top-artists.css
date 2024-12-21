@@ -1,0 +1,89 @@
+/* Başlık */
+h1 {
+    margin: 0;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Zaman aralığı ve limit seçimi */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    gap: 15px;
+}
+
+.filter-container label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+.filter-container select,
+.filter-container input {
+    padding: 8px 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.filter-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #1db954;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-container button:hover {
+    background-color: #14843b;
+}
+
+/* Sanatçı kartlarının gridi */
+.artist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Kart boyutu artırıldı */
+    gap: 25px;
+    max-width: 1400px; /* Konteyner genişliği artırıldı */
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* Sanatçı kartları */
+.artist-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15); /* Daha belirgin gölge */
+    text-align: center;
+    padding: 30px; /* İç alan genişletildi */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.artist-card:hover {
+    transform: scale(1.1); /* Daha belirgin büyütme */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Sanatçı resimleri */
+.artist-card img {
+    width: 200px; /* Resimler büyütüldü */
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+/* Sanatçı isimleri */
+.artist-card h3 {
+    font-size: 20px; /* Yazı boyutu büyütüldü */
+    color: #333;
+    margin: 15px 0 0 0;
+}

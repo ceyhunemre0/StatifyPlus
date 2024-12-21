@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Artists</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/top-artists.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="brand">Stats for Spotify</div>
+        <div class="nav-links">
+            <a href="/">Home Page</a>
+            <a href="/top-tracks">Top Tracks</a>
+            <a href="/top-artists">Top Artists</a>
+        </div>
+        {% if user %}
+        <div class="profile">
+            <img src="{{ user['profile_image'] }}" alt="{{ user['display_name'] }}">
+            <span>{{ user['display_name'] }}</span>
+        </div>
+        {% else %}
+        <a href="/login" class="login-btn">Login</a>
+        {% endif %}
+    </nav>
+
+    <h1>Top Artists</h1>
+    <!-- Form for selecting time range and limit -->
+    <div class="filter-container">
+        <form action="/top-artists" method="get">
+            <label for="timeRange">Time Range:</label>
+            <select name="timeRange" id="timeRange">
+                <option value="short_term" {% if time_range == 'short_term' %}selected{% endif %}>Last 4 Weeks</option>
+                <option value="medium_term" {% if time_range == 'medium_term' %}selected{% endif %}>Last 6 Months</option>
+                <option value="long_term" {% if time_range == 'long_term' %}selected{% endif %}>All Time</option>
+            </select>
+
+            <label for="limit">Limit:</label>
+            <select name="limit" id="limit">
+                <option value="5" {% if limit == 5 %}selected{% endif %}>5</option>
+                <option value="10" {% if limit == 10 %}selected{% endif %}>10</option>
+                <option value="20" {% if limit == 20 %}selected{% endif %}>20</option>
+                <option value="50" {% if limit == 50 %}selected{% endif %}>50</option>
+            </select>
+            <button type="submit">Apply</button>
+        </form>
+    </div>
+
+    
+
+    <!-- Artists Grid -->
+    <div class="artist-grid">
+        {% for artist in artists %}
+        <a href="{{ artist.external_urls.spotify }}" target="_blank" class="artist-card">
+            <img src="{{ artist.images[0].url }}" alt="{{ artist.name }}">
+            <h3>{{ loop.index }}. {{ artist.name }}</h3>
+        </a>
+        {% endfor %}
+    </div>
+
+    <footer>
+        <p>Powered by Spotify</p>
+    </footer>
+</body>
+</html>
