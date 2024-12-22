@@ -1,0 +1,187 @@
+/* Genel Ayarlar */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fcfffc; /* Açık beyaz arka plan */
+    margin: 0;
+    padding: 0;
+    color: #040f0f; /* Metin rengi */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+    color: #040f0f; /* Koyu siyah */
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #248232; /* Ana koyu yeşil */
+    color: #fcfffc; /* Açık beyaz yazı */
+    box-shadow: 0px 4px 6px rgba(4, 15, 15, 0.1); /* Koyu siyah ton */
+}
+
+.navbar .brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #fcfffc; /* Açık beyaz yazı */
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #2d3a3a; /* Koyu ton hover */
+}
+
+/* Profil Menüsü */
+.profile-container {
+    position: relative;
+}
+
+.profile-btn {
+    background: none;
+    border: none;
+    color: #fcfffc; /* Beyaz */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+}
+
+.profile-btn img {
+    width: 35px; /* Profil fotoğrafı boyutu */
+    height: 35px;
+    border-radius: 50%;
+}
+
+.profile-btn:hover {
+    background-color: #248232; /* Canlı yeşil */
+    color: #FCFFFC; /* Beyaz */
+}
+
+.language-dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fcfffc; /* Beyaz */
+    color: #040f0f; /* Çok koyu gri/siyah */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1000;
+    width: 200px;
+}
+
+.language-dropdown.active {
+    display: block;
+}
+
+.language-dropdown div {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.language-dropdown div:hover {
+    background-color: #f1f1f1;
+}
+
+.language-dropdown img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #040f0f; /* Koyu siyah */
+    font-size: 0.9rem;
+    color: #fcfffc; /* Beyaz */
+    margin-top: auto;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #fcfffc; /* Açık beyaz */
+    color: #040f0f; /* Siyah */
+}
+
+.hero {
+    background-color: #2d3a3a; /* Orta ton */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    color: #fcfffc; /* Beyaz */
+    max-width: 600px;
+    width: 100%;
+}
+
+.hero h1 {
+    color: #fcfffc; /* Beyaz */
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.hero a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #248232; /* Koyu yeşil */
+    color: #fcfffc; /* Beyaz */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hero a:hover {
+    background-color: #2ba84a; /* Daha canlı yeşil */
+    color: #fcfffc; /* Beyaz */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #040f0f; /* Paletten koyu gri */
+    color: #fcfffc; /* Beyaz */
+    margin-top: 40px;
+    font-size: 0.9em;
+}

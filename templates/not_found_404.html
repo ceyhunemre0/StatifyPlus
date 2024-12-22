@@ -4,20 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Callback</title>
+    <title>404 Not Found</title>
     <link rel="stylesheet" href="/static/callback.css">
     <link rel="stylesheet" href="/static/style.css">
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Backend tarafından success değeri true/false olarak gönderiliyor
-            var success = { success };
-            if (success) {
-                setTimeout(function () {
-                    window.location.href = '/';
-                }, 15000);
-            }
-        });
-    </script>
 </head>
 
 <body>
@@ -29,6 +18,7 @@
             <a href="/top-tracks" class="nav-link active">Top Tracks</a>
             <a href="/top-artists" class="nav-link">Top Artists</a>
         </div>
+        {% if user %}
         <div class="profile-container">
             <button class="profile-btn" onclick="toggleDropdown()">
                 {% if user.profile_image %}
@@ -43,6 +33,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </nav>
 
     <!-- Main Content -->
@@ -57,9 +48,10 @@
         </section>
         {% else %}
         <section class="hero" style="background-color: #2d3a3a;">
-            <h1>Yetkilendirme Başarısız</h1>
-            <p>Giriş işleminizde bir sorun oluştu. Lütfen tekrar deneyin.</p>
-            <a href="/login">Tekrar Dene</a>
+            <h1>404</h1>
+            <p>Sorry, the page you are looking for could not be found.</p>
+            <p>You may have mistyped the URL or the page has been removed.</p>
+            <a href="/">Go Back to Home</a>
         </section>
         {% endif %}
     </main>
@@ -68,6 +60,18 @@
     <footer>
         <p>&copy; 2023 Stats For Spotify. Tüm hakları saklıdır.</p>
     </footer>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Backend tarafından success değeri true/false olarak gönderiliyor
+            var success = { success };
+            if (success) {
+                setTimeout(function () {
+                    window.location.href = '/';
+                }, 15000);
+            }
+        });
+    </script>
+    <script src="/static/main.js"></script>
 </body>
 
 </html>

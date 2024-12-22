@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, session, render_template, url_for
+from flask import Flask, request, redirect, session, render_template, url_for, abort
 import requests
 import base64
 from dotenv import load_dotenv
@@ -128,7 +128,7 @@ def callback():
                 'display_name': user_data['display_name'],
                 'profile_image': user_data['images'][0]['url'] if user_data['images'] else None
             }
-        return render_template('callback.html', success=True)
+        return render_template('callback.html', success=True, user=session['user'])
     else:
         return render_template('callback.html', success=False)
 
@@ -184,7 +184,7 @@ def top_artists():
     if response.status_code == 200:
         data = response.json()
         artists = data['items']
-        return render_template('top_artists.html', artists=artists, user=user, time_range=time_range, current_language=current_language)
+        return render_template('top_artists.html', artists=artists, user=user, time_range=time_range)
     else:
         return f"Failed to fetch top artists: {response.text}", response.status_code
     
@@ -193,13 +193,15 @@ def logout():
     clear_session()
     return redirect(url_for('welcome'))
 
-@app.route('/set_language/<lang>')
-def set_language(lang):
-    if lang in ['en', 'tr']:
-        session['current_language'] = lang
-    return redirect(request.referrer or url_for('home'))
+@app.errorhandler(404)
+def not_found_error(error):
+    user = session.get('user')
+    return render_template('not_found_404.html', user = user), 404
 
-
+# Yakalanmayan yolları 404'e yönlendirme
+@app.route('/<path:unknown_path>')
+def catch_all(unknown_path):
+    abort(404)
 
 if __name__ == '__main__':
     app.run(port=8888)

@@ -39,6 +39,7 @@ body {
 }
 
 .nav-link:hover {
+    color: #FCFFFC;
     background-color: #248232; /* Canlı yeşil */
 }
 
@@ -223,23 +224,6 @@ body {
     font-weight: bold;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #040F0F; /* Çok koyu yeşil */
-    font-size: 0.9rem;
-    color: #FCFFFC; /* Çok açık beyaz */
-}
-
-footer a {
-    color: #248232; /* Canlı yeşil */
-    text-decoration: none;
-}
-
-footer a:hover {
-    color: #2BA84A; /* Orta yeşil */
-}
 
 /* "For More" Linkleri */
 .more-link {
@@ -263,4 +247,45 @@ footer a:hover {
 .more-link:active {
     background-color: #2D3A3A; /* Daha koyu renk, tıklanma efekti */
     transform: scale(0.98); /* Hafif küçültme efekti */
+}
+
+/* Scrollbar Tasarımı */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2BA84A;
+    border-radius: 5px;
+    border: 3px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #248232;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #2D3A3A;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #040F0F; /* Çok koyu yeşil */
+    font-size: 0.9rem;
+    color: #FCFFFC; /* Çok açık beyaz */
+}
+
+footer a {
+    color: #248232; /* Canlı yeşil */
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #2BA84A; /* Orta yeşil */
 }

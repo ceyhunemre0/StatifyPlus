@@ -19,15 +19,17 @@ h1 {
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: #248232; /* Ana koyu yeşil */
-    color: #fcfffc; /* Beyaz */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #248232;
+    /* Ana koyu yeşil */
+    color: #fcfffc;
+    /* Açık beyaz yazı */
+    box-shadow: 0px 4px 6px rgba(4, 15, 15, 0.1);
+    /* Koyu siyah ton */
 }
 
 .navbar .brand {
     font-size: 24px;
     font-weight: bold;
-    color: #fcfffc; /* Beyaz */
 }
 
 .nav-links {
@@ -37,7 +39,8 @@ h1 {
 
 .nav-link {
     text-decoration: none;
-    color: #fcfffc; /* Beyaz */
+    color: #fcfffc;
+    /* Açık beyaz yazı */
     font-size: 18px;
     padding: 5px 10px;
     border-radius: 5px;
@@ -45,7 +48,8 @@ h1 {
 }
 
 .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: #2d3a3a;
+    /* Koyu ton hover */
 }
 
 /* Profil Menüsü */
@@ -54,20 +58,28 @@ h1 {
 }
 
 .profile-btn {
-    background: none;
-    border: none;
-    color: #fcfffc; /* Beyaz */
+    background: #248232;
+    border: 2px solid #2D3A3A;
+    color: #FCFFFC;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 18px;
+    padding: 5px 15px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
 }
 
 .profile-btn img {
-    width: 35px; /* Profil fotoğrafı boyutu */
+    width: 35px;
     height: 35px;
     border-radius: 50%;
+}
+
+.profile-btn:hover {
+    background-color: #2D3A3A;
+    color: #FCFFFC;
 }
 
 .language-dropdown {
@@ -75,8 +87,8 @@ h1 {
     position: absolute;
     top: 50px;
     right: 0;
-    background-color: #fcfffc; /* Beyaz */
-    color: #040f0f; /* Çok koyu gri/siyah */
+    background-color: white;
+    color: black;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     overflow: hidden;
@@ -96,13 +108,14 @@ h1 {
 }
 
 .language-dropdown div:hover {
-    background-color: #f1f1f1;
+    background-color: #f4f4f9;
 }
 
 .language-dropdown img {
     width: 20px;
     margin-right: 10px;
 }
+
 
 /* Zaman Aralığı Seçici */
 .time-range-selector {
@@ -189,11 +202,34 @@ h1 {
     margin: 15px 0 0 0;
 }
 
+/* Scrollbar Tasarımı */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2BA84A;
+    border-radius: 5px;
+    border: 3px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #248232;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #2D3A3A;
+}
+
 /* Footer */
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #2d3a3a; /* Paletten koyu gri */
+    background-color: #040f0f; /* Paletten koyu gri */
     font-size: 0.9rem;
     color: #fcfffc; /* Beyaz */
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,47 +10,77 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
-            color: #ffffff;
+            background-color: #FCFFFC;
+            /* Çok açık beyaz */
+            color: #040F0F;
+            /* Çok koyu yeşil */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+            /* İçeriği büyüyen alan yapar, footer'ı aşağı iter */
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
-            background-color: #1db954;
+            padding: 15px 20px;
+            background-color: #040F0F; /* Çok koyu yeşil */
+            color: #FCFFFC; /* Çok açık beyaz */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .navbar .brand {
-            font-size: 1.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 24px;
             font-weight: bold;
+            color: #2BA84A; /* Orta yeşil */
         }
 
-        .navbar .nav-links a {
-            margin: 0 10px;
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
             text-decoration: none;
-            color: #ffffff;
-            font-weight: 600;
+            color: #FCFFFC; /* Çok açık beyaz */
+            font-size: 18px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .navbar .profile img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
+        .nav-link:hover {
+            color: #FCFFFC;
+            background-color: #248232; /* Canlı yeşil */
         }
 
-        .navbar .profile span,
         .navbar .login-btn {
-            color: #ffffff;
-            font-weight: 600;
+            color: #FCFFFC; /* Çok açık beyaz */
+            background-color: #2BA84A; /* Orta yeşil */
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .navbar .login-btn:hover {
+            color: #2BA84A;
+            background-color: #FCFFFC; /* Canlı yeşil */
+            transform: scale(1.1);
         }
 
         .hero {
             text-align: center;
             padding: 50px 20px;
-            background-color: #1db954;
+            background-color: #248232; /* Canlı yeşil */
+            color: #FCFFFC;
         }
 
         .hero h1 {
@@ -62,33 +93,37 @@
         }
 
         .cta-btn {
-            margin-top: 20px;
+            margin-top: 40px; /* Daha fazla boşluk eklendi */
             padding: 12px 30px;
-            background-color: #ffffff;
-            color: #1db954;
+            background-color: #2BA84A; /* Orta yeşil */
+            color: #FCFFFC;
             border-radius: 25px;
             text-decoration: none;
             font-weight: 600;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .cta-btn:hover {
-            background-color: #18a148;
+            background-color: #FCFFFC; /* Beyaz */
+            color: #248232; /* Canlı yeşil */
+            border: 2px solid #248232; /* Kenarlık eklendi */
         }
 
         .stats {
             max-width: 1100px;
             margin: 40px auto;
             padding: 20px;
-            background-color: #181818;
+            background-color: #2D3A3A; /* Koyu gri-yeşil */
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            color: #FCFFFC;
         }
 
         .stats h2 {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 20px;
+            color: #248232; /* Canlı yeşil */
         }
 
         .stats-container {
@@ -105,7 +140,7 @@
 
         .stat-item h3 {
             font-size: 1.8rem;
-            color: #1db954;
+            color: #2BA84A; /* Orta yeşil */
         }
 
         .stat-item ul {
@@ -114,35 +149,47 @@
         }
 
         .stat-item ul li {
-            background-color: #282828;
+            background-color: #040F0F; /* Çok koyu yeşil */
             margin: 10px 0;
             padding: 15px;
             border-radius: 8px;
             font-size: 1.2rem;
             transition: background-color 0.3s ease;
+            color: #FCFFFC;
             cursor: pointer;
         }
 
         .stat-item ul li:hover {
-            background-color: #3a3a3a;
+            background-color: #248232; /* Canlı yeşil */
         }
 
         footer {
             text-align: center;
             padding: 20px;
-            background-color: #181818;
+            background-color: #040F0F; /* Çok koyu yeşil */
             font-size: 0.9rem;
+            color: #FCFFFC;
+        }
+
+        footer a {
+            color: #248232; /* Canlı yeşil */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #2BA84A; /* Orta yeşil */
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="brand">Tops For Spotify</div>
+        <div class="brand">Stats for Spotify</div>
         <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/top-tracks">Top Tracks</a>
-            <a href="/top-artists">Top Artists</a>
+            <a href="/" class="nav-link">Home</a>
+            <a href="/top-tracks" class="nav-link active">Top Tracks</a>
+            <a href="/top-artists" class="nav-link">Top Artists</a>
         </div>
         <div class="profile">
             <a href="/login" class="login-btn">Login</a>
@@ -182,4 +229,5 @@
         <p>&copy; 2023 Stats For Spotify. All rights reserved.</p>
     </footer>
 </body>
+
 </html>
