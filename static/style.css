@@ -109,7 +109,7 @@ a {
 }
 
 a:hover {
-    color: #2ba84a; /* Daha canlı yeşil */
+    color: #fcfffc;
 }
 
 /* Scrollbar Tasarımı */
@@ -135,6 +135,7 @@ a:hover {
     background: #2D3A3A;
 }
 
+/*Playlist*/
 .playlist-grid {
     text-align: center;
     margin: 40px auto;
