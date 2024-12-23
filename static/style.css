@@ -152,9 +152,9 @@ a:hover {
     flex-wrap: nowrap; /* Kartların tek satırda yerleşmesini sağlar */
     overflow-x: hidden; /* Yatay sürükleme imlecini kaldırmak için */
     overflow-y: hidden; /* Dikey sürükleme imlecini kaldırmak için */
-    gap: 10px; /* Kartlar arasındaki boşluğu iyice azalttık */
+    gap: 15px; /* Kartlar arasındaki boşluk */
     justify-content: flex-start; /* Kartları sola hizalamak için */
-    padding: 10px; /* Kenarlardan biraz daha az boşluk bırakmak için */
+    padding: 10px; /* Kenarlardan biraz boşluk bırakmak için */
     width: 100%; /* Konteynerin genişliğini ayarlamak için */
     margin: 0 auto; /* Ortalamak için */
     position: relative; /* Konteyneri sabit tutmak için */
@@ -164,13 +164,13 @@ a:hover {
     background-color: #fcfffc;
     border: 1px solid #ddd;
     border-radius: 10px;
-    padding: 10px; /* Kart içindeki boşluğu biraz azalttık */
-    width: calc(18% - 10px); /* Kart genişliğini daha da küçülttük */
-    height: auto; /* Kartların yüksekliğinin içeriğe göre ayarlanmasını sağlar */
+    padding: 10px; /* Kart içindeki boşluk */
+    width: 220px; /* Kart genişliğini sabit yaptık */
+    height: auto; /* Kartların yüksekliğini içeriğe göre ayarlanmasını sağlar */
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
-    flex: 0 0 calc(18% - 10px); /* Flex özelliğini güncelledik */
+    flex: 0 0 220px; /* Kart genişliğini sabitledik */
 }
 
 .track-card img {
@@ -185,7 +185,7 @@ a:hover {
 }
 
 .random-track-btn {
-    background-color: #2ba84a; /* Canlı yeşil */
+    background-color: #248232; /* Canlı yeşil */
     color: #fcfffc; /* Beyaz */
     padding: 10px 20px;
     border: none;
@@ -199,6 +199,7 @@ a:hover {
 .random-track-btn:hover {
     background-color: #248232; /* Daha koyu yeşil */
 }
+
 
 
 /* Footer */
