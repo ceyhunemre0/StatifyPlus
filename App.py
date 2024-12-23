@@ -17,7 +17,7 @@ CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 SECRET_KEY = os.getenv('SECRET_KEY')
 REDIRECT_URI = 'http://localhost:8888/callback'
-SCOPES = 'user-top-read user-read-private user-read-email'
+SCOPES = 'user-top-read user-read-private user-read-email user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-currently-playing'
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 TOKEN_URL = 'https://accounts.spotify.com/api/token'
 endpoint = "https://api.spotify.com/v1/me"
@@ -207,11 +207,15 @@ def get_playlist_tracks():
             })
     return jsonify(tracks)
 
-@app.route('/api/random_track')
+"""@app.route('/api/random_track')
 def get_random_track():
     tracks = []
     with open('static/playlist_tracks.csv', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
+        required_columns = {'Track Name', 'Artist', 'Album', 'Image URL', 'Spotify URL', 'Context URI'}
+        if not required_columns.issubset(reader.fieldnames):
+            logging.error('CSV file is missing required columns')
+            return jsonify({'error': 'CSV file format is invalid'}), 400
         for row in reader:
             tracks.append({
                 'trackName': row['Track Name'],
@@ -222,20 +226,30 @@ def get_random_track():
                 'contextUri': row['Context URI']
             })
     random_track = random.choice(tracks)
-    
-    # Spotify Web API'ye istek atmak için access token al
+
     access_token = session.get('access_token')
     if not access_token:
         logging.error('Access token not found')
         return jsonify({'error': 'Access token not found'}), 401
 
-    logging.info(f'Access token found: {access_token}')
-
-    # Spotify Web API'ye şarkıyı başlatmak için istek at
     headers = {
         'Authorization': f'Bearer {access_token}',
         'Content-Type': 'application/json'
     }
+    if not random_track.get('contextUri'):
+        logging.error('Context URI is missing for the selected track')
+        return jsonify({'error': 'Context URI is missing'}), 400
+
+    # Check active Spotify device
+    device_response = requests.get('https://api.spotify.com/v1/me/player/devices', headers=headers)
+    if device_response.status_code == 200:
+        device_info = device_response.json()['devices'][0]['id']
+        if not device_info.get('device'):
+            return jsonify({'error': 'No active Spotify device found'}), 400
+    else:
+        logging.error('Failed to fetch Spotify player details')
+        return jsonify({'error': 'Failed to fetch player details', 'details': device_response.json()}), device_response.status_code
+
     data = {
         "context_uri": random_track['contextUri'],
         "offset": {
@@ -243,14 +257,19 @@ def get_random_track():
         },
         "position_ms": 0
     }
-    response = requests.put('https://api.spotify.com/v1/me/player/play', headers=headers, json=data)
-    
+    response = requests.put(f'https://api.spotify.com/v1/me/player/play{device_info}', headers=headers, json=data)
+
     if response.status_code != 204:
-        logging.error(f'Failed to start playback: {response.json()}')
-        return jsonify({'error': 'Failed to start playback', 'details': response.json()}), response.status_code
+        try:
+            error_details = response.json()
+        except ValueError:
+            error_details = {'message': 'Unknown error occurred'}
+        logging.error(f'Failed to start playback: {error_details}')
+        return jsonify({'error': 'Failed to start playback', 'details': error_details}), response.status_code
 
     logging.info('Playback started successfully')
-    return jsonify(random_track)
+    return jsonify(random_track)"""
+
 
 @app.route('/logout')
 def logout():
