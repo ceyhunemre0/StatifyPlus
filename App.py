@@ -1,10 +1,13 @@
-from flask import Flask, request, redirect, session, render_template, url_for, abort
+import csv
+import random
+from flask import Flask, jsonify, request, redirect, session, render_template, url_for, abort
 import requests
 import base64
 from dotenv import load_dotenv
 import os
 import urllib.parse
 from datetime import timedelta
+import logging
 
 # .env dosyasını yükle
 load_dotenv()
@@ -188,6 +191,67 @@ def top_artists():
     else:
         return f"Failed to fetch top artists: {response.text}", response.status_code
     
+
+@app.route('/api/playlist_tracks')
+def get_playlist_tracks():
+    tracks = []
+    with open('static/playlist_tracks.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            tracks.append({
+                'trackName': row['Track Name'],
+                'artist': row['Artist'],
+                'album': row['Album'],
+                'imageUrl': row['Image URL'],
+                'spotifyUrl': row['Spotify URL']
+            })
+    return jsonify(tracks)
+
+@app.route('/api/random_track')
+def get_random_track():
+    tracks = []
+    with open('static/playlist_tracks.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            tracks.append({
+                'trackName': row['Track Name'],
+                'artist': row['Artist'],
+                'album': row['Album'],
+                'imageUrl': row['Image URL'],
+                'spotifyUrl': row['Spotify URL'],
+                'contextUri': row['Context URI']
+            })
+    random_track = random.choice(tracks)
+    
+    # Spotify Web API'ye istek atmak için access token al
+    access_token = session.get('access_token')
+    if not access_token:
+        logging.error('Access token not found')
+        return jsonify({'error': 'Access token not found'}), 401
+
+    logging.info(f'Access token found: {access_token}')
+
+    # Spotify Web API'ye şarkıyı başlatmak için istek at
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': 'application/json'
+    }
+    data = {
+        "context_uri": random_track['contextUri'],
+        "offset": {
+            "position": 0
+        },
+        "position_ms": 0
+    }
+    response = requests.put('https://api.spotify.com/v1/me/player/play', headers=headers, json=data)
+    
+    if response.status_code != 204:
+        logging.error(f'Failed to start playback: {response.json()}')
+        return jsonify({'error': 'Failed to start playback', 'details': response.json()}), response.status_code
+
+    logging.info('Playback started successfully')
+    return jsonify(random_track)
+
 @app.route('/logout')
 def logout():
     clear_session()
@@ -202,6 +266,48 @@ def not_found_error(error):
 @app.route('/<path:unknown_path>')
 def catch_all(unknown_path):
     abort(404)
+"""                          -----İLGİLİ  PLAYLİSTİ CSV DOSYASINA YAZDIRIR-----  http://localhost:8888/playlist    endpointe istek at
+@app.route('/playlist')
+def get_playlist():
+    playlist_id = '3E5X6JXhY97W56uCBUe3Sw'  # Çalma listesi ID'sini buraya girin
+    access_token = session.get('access_token')
+    if not access_token:
+        return redirect(url_for('welcome'))
+
+    headers = {'Authorization': f'Bearer {access_token}'}
+    response = requests.get(f"https://api.spotify.com/v1/playlists/{playlist_id}", headers=headers)
+
+    if response.status_code == 401:  # Unauthorized
+        clear_session()
+        return redirect(url_for('welcome'))
+
+    if response.status_code == 200:
+        playlist_data = response.json()
+        write_tracks_to_csv(playlist_data['tracks']['items'], 'static/playlist_tracks.csv')
+        return jsonify(playlist_data)
+    else:
+        return f"Failed to fetch playlist: {response.text}", response.status_code
+
+def write_tracks_to_csv(tracks, filename):
+
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    with open(filename, mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        # CSV başlık satırı
+        writer.writerow(['Track Name', 'Artist', 'Album', 'Image URL', 'Spotify URL', 'Context URI'])
+        
+        for item in tracks:
+            track = item['track']
+            track_name = track['name']  # Parça adı
+            artist_name = track['artists'][0]['name']  # İlk sanatçı adı
+            album_name = track['album']['name']  # Albüm adı
+            context_uri = track['album']['uri']  # Albüm URI'si
+            image_url = track['album']['images'][0]['url']  # Albüm görsel URL'si
+            spotify_url = track['external_urls'].get('spotify', 'N/A')  # Spotify URL'si
+
+            # CSV'ye yaz
+            writer.writerow([track_name, artist_name, album_name, image_url, spotify_url, context_uri])
+"""
 
 if __name__ == '__main__':
     app.run(port=8888)

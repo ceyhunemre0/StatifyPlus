@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #fcfffc; /* Paletten açık renk arka plan */
+    overflow-x: hidden;
 }
 
 /* Navbar styles */
@@ -132,6 +133,73 @@ a:hover {
 
 ::-webkit-scrollbar-thumb:active {
     background: #2D3A3A;
+}
+
+.playlist-grid {
+    text-align: center;
+    margin: 40px auto;
+}
+
+.playlist-container {
+    overflow: hidden;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: nowrap; /* Kartların tek satırda yerleşmesini sağlar */
+    overflow-x: hidden; /* Yatay sürükleme imlecini kaldırmak için */
+    overflow-y: hidden; /* Dikey sürükleme imlecini kaldırmak için */
+    gap: 20px;
+    justify-content: flex-start; /* Kartları sola hizalamak için */
+    padding: 20px; /* Kenarlardan biraz boşluk bırakmak için */
+    width: 100%; /* Konteynerin genişliğini ayarlamak için */
+    margin: 0 auto; /* Ortalamak için */
+    position: relative; /* Konteyneri sabit tutmak için */
+}
+
+.track-card {
+    background-color: #fcfffc;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: calc(20% - 20px); /* Kartların genişliğini ayarlamak için */
+    height: auto; /* Kartların yüksekliğinin içeriğe göre ayarlanmasını sağlar */
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    flex: 0 0 calc(20% - 20px); /* Kartların düzgün yerleşmesini sağlamak için flex özelliğini ekleyin */
+
+}
+
+.track-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.track-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+
+}
+
+.random-track-btn {
+    background-color: #2ba84a; /* Canlı yeşil */
+    color: #fcfffc; /* Beyaz */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    margin-top: 20px;
+}
+
+.random-track-btn:hover {
+    background-color: #248232; /* Daha koyu yeşil */
 }
 
 /* Footer */
