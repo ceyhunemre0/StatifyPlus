@@ -207,70 +207,6 @@ def get_playlist_tracks():
             })
     return jsonify(tracks)
 
-"""@app.route('/api/random_track')
-def get_random_track():
-    tracks = []
-    with open('static/playlist_tracks.csv', newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        required_columns = {'Track Name', 'Artist', 'Album', 'Image URL', 'Spotify URL', 'Context URI'}
-        if not required_columns.issubset(reader.fieldnames):
-            logging.error('CSV file is missing required columns')
-            return jsonify({'error': 'CSV file format is invalid'}), 400
-        for row in reader:
-            tracks.append({
-                'trackName': row['Track Name'],
-                'artist': row['Artist'],
-                'album': row['Album'],
-                'imageUrl': row['Image URL'],
-                'spotifyUrl': row['Spotify URL'],
-                'contextUri': row['Context URI']
-            })
-    random_track = random.choice(tracks)
-
-    access_token = session.get('access_token')
-    if not access_token:
-        logging.error('Access token not found')
-        return jsonify({'error': 'Access token not found'}), 401
-
-    headers = {
-        'Authorization': f'Bearer {access_token}',
-        'Content-Type': 'application/json'
-    }
-    if not random_track.get('contextUri'):
-        logging.error('Context URI is missing for the selected track')
-        return jsonify({'error': 'Context URI is missing'}), 400
-
-    # Check active Spotify device
-    device_response = requests.get('https://api.spotify.com/v1/me/player/devices', headers=headers)
-    if device_response.status_code == 200:
-        device_info = device_response.json()['devices'][0]['id']
-        if not device_info.get('device'):
-            return jsonify({'error': 'No active Spotify device found'}), 400
-    else:
-        logging.error('Failed to fetch Spotify player details')
-        return jsonify({'error': 'Failed to fetch player details', 'details': device_response.json()}), device_response.status_code
-
-    data = {
-        "context_uri": random_track['contextUri'],
-        "offset": {
-            "position": 0
-        },
-        "position_ms": 0
-    }
-    response = requests.put(f'https://api.spotify.com/v1/me/player/play{device_info}', headers=headers, json=data)
-
-    if response.status_code != 204:
-        try:
-            error_details = response.json()
-        except ValueError:
-            error_details = {'message': 'Unknown error occurred'}
-        logging.error(f'Failed to start playback: {error_details}')
-        return jsonify({'error': 'Failed to start playback', 'details': error_details}), response.status_code
-
-    logging.info('Playback started successfully')
-    return jsonify(random_track)"""
-
-
 @app.route('/logout')
 def logout():
     clear_session()
@@ -285,10 +221,10 @@ def not_found_error(error):
 @app.route('/<path:unknown_path>')
 def catch_all(unknown_path):
     abort(404)
-"""                          -----İLGİLİ  PLAYLİSTİ CSV DOSYASINA YAZDIRIR-----  http://localhost:8888/playlist    endpointe istek at
+"""                          -----İLGİLİ  PLAYLİSTİ CSV DOSYASINA YAZDIRIR----
 @app.route('/playlist')
 def get_playlist():
-    playlist_id = '3E5X6JXhY97W56uCBUe3Sw'  # Çalma listesi ID'sini buraya girin
+    playlist_id = ''  # Çalma listesi ID'sini buraya girin
     access_token = session.get('access_token')
     if not access_token:
         return redirect(url_for('welcome'))
