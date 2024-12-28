@@ -1,0 +1,5 @@
+flask
+requests
+dotenv
+urllib3
+logging
