@@ -1,12 +1,11 @@
-// Dil değiştirme fonksiyonu
 function toggleDropdown() {
-    const dropdown = document.getElementById("languageDropdown");
+    const dropdown = document.getElementById("dropdown");
     dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
 
 /// Profil butonuna ve dropdown menüsüne erişim
 const profileBtn = document.querySelector('.profile-btn');
-const dropdown = document.querySelector('.language-dropdown');
+const dropdown = document.querySelector('.dropdown');
 
 // Dropdown menüyü açma ve kapama
 profileBtn.addEventListener('click', (e) => {

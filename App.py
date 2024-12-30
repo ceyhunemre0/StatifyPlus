@@ -1,5 +1,4 @@
 import csv
-import random
 from flask import Flask, jsonify, request, redirect, session, render_template, url_for, abort
 import requests
 import base64
@@ -7,7 +6,6 @@ from dotenv import load_dotenv
 import os
 import urllib.parse
 from datetime import timedelta
-import logging
 
 # .env dosyasını yükle
 load_dotenv()
@@ -25,7 +23,7 @@ endpoint = "https://api.spotify.com/v1/me"
 # Flask uygulamasını oluştur
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=15)
 
 def clear_session():
     session.pop('access_token', None)
@@ -166,7 +164,6 @@ def top_tracks():
 def top_artists():
     access_token = session.get('access_token')
     user = session.get('user')
-    current_language = session.get('current_language', 'en')
 
     if not access_token:
         return redirect(url_for('welcome'))
@@ -221,7 +218,7 @@ def not_found_error(error):
 @app.route('/<path:unknown_path>')
 def catch_all(unknown_path):
     abort(404)
-"""                          -----İLGİLİ  PLAYLİSTİ CSV DOSYASINA YAZDIRIR----
+"""                          -----İLGİLİ  PLAYLİSTİ CSV DOSYASINA YAZDIRIR---- 
 @app.route('/playlist')
 def get_playlist():
     playlist_id = ''  # Çalma listesi ID'sini buraya girin
