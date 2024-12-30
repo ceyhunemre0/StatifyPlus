@@ -17,7 +17,7 @@ CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 SECRET_KEY = os.getenv('SECRET_KEY')
 REDIRECT_URI = 'http://localhost:8888/callback'
-SCOPES = 'user-top-read user-read-private user-read-email'
+SCOPES = 'user-top-read user-read-private user-read-email user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-currently-playing'
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 TOKEN_URL = 'https://accounts.spotify.com/api/token'
 endpoint = "https://api.spotify.com/v1/me"
@@ -207,51 +207,6 @@ def get_playlist_tracks():
             })
     return jsonify(tracks)
 
-@app.route('/api/random_track')
-def get_random_track():
-    tracks = []
-    with open('static/playlist_tracks.csv', newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            tracks.append({
-                'trackName': row['Track Name'],
-                'artist': row['Artist'],
-                'album': row['Album'],
-                'imageUrl': row['Image URL'],
-                'spotifyUrl': row['Spotify URL'],
-                'contextUri': row['Context URI']
-            })
-    random_track = random.choice(tracks)
-    
-    # Spotify Web API'ye istek atmak için access token al
-    access_token = session.get('access_token')
-    if not access_token:
-        logging.error('Access token not found')
-        return jsonify({'error': 'Access token not found'}), 401
-
-    logging.info(f'Access token found: {access_token}')
-
-    # Spotify Web API'ye şarkıyı başlatmak için istek at
-    headers = {
-        'Authorization': f'Bearer {access_token}',
-        'Content-Type': 'application/json'
-    }
-    data = {
-        "context_uri": random_track['contextUri'],
-        "offset": {
-            "position": 0
-        },
-        "position_ms": 0
-    }
-    response = requests.put('https://api.spotify.com/v1/me/player/play', headers=headers, json=data)
-    
-    if response.status_code != 204:
-        logging.error(f'Failed to start playback: {response.json()}')
-        return jsonify({'error': 'Failed to start playback', 'details': response.json()}), response.status_code
-
-    logging.info('Playback started successfully')
-    return jsonify(random_track)
-
 @app.route('/logout')
 def logout():
     clear_session()
@@ -266,10 +221,10 @@ def not_found_error(error):
 @app.route('/<path:unknown_path>')
 def catch_all(unknown_path):
     abort(404)
-"""                          -----İLGİLİ  PLAYLİSTİ CSV DOSYASINA YAZDIRIR-----  http://localhost:8888/playlist    endpointe istek at
+"""                          -----İLGİLİ  PLAYLİSTİ CSV DOSYASINA YAZDIRIR----
 @app.route('/playlist')
 def get_playlist():
-    playlist_id = '3E5X6JXhY97W56uCBUe3Sw'  # Çalma listesi ID'sini buraya girin
+    playlist_id = ''  # Çalma listesi ID'sini buraya girin
     access_token = session.get('access_token')
     if not access_token:
         return redirect(url_for('welcome'))

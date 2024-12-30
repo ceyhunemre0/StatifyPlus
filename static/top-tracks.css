@@ -37,6 +37,18 @@ h1 {
     font-weight: bold;
 }
 
+.brand a {
+    text-decoration: none; /* Alt çizgiyi kaldır */
+    color: #fcfffc; /* Normal durumda beyaz */
+    font-size: 24px;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Renk geçiş efekti */
+}
+
+.brand a:hover {
+    color: #2D3A3A; /* Hover durumunda açık gri */
+}
+
 .nav-links {
     display: flex;
     gap: 20px;
