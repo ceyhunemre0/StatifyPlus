@@ -91,7 +91,7 @@ h1 {
     color: #FCFFFC; /* Beyaz */
 }
 
-.language-dropdown {
+.dropdown {
     display: none;
     position: absolute;
     top: 50px;
@@ -105,22 +105,22 @@ h1 {
     width: 200px;
 }
 
-.language-dropdown.active {
+.dropdown.active {
     display: block;
 }
 
-.language-dropdown div {
+.dropdown div {
     padding: 10px 15px;
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
-.language-dropdown div:hover {
+.dropdown div:hover {
     background-color: #f1f1f1;
 }
 
-.language-dropdown img {
+.dropdown img {
     width: 20px;
     margin-right: 10px;
 }
