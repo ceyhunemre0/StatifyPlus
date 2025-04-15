@@ -1,5 +1,5 @@
 flask
 requests
-dotenv
+python-dotenv
 urllib3
 logging

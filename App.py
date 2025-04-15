@@ -141,7 +141,7 @@ def top_tracks():
         return redirect(url_for('welcome'))
 
     time_range = request.args.get('timeRange', 'short_term')
-    limit = 20  # Limit her zaman 20
+    limit = 50  # Limit her zaman 20
 
     headers = {'Authorization': f'Bearer {access_token}'}
     response = requests.get(
@@ -169,7 +169,7 @@ def top_artists():
         return redirect(url_for('welcome'))
 
     time_range = request.args.get('timeRange', 'short_term')
-    limit = 20  # Limit her zaman 20
+    limit = 50  # Limit her zaman 20
 
     headers = {'Authorization': f'Bearer {access_token}'}
     response = requests.get(
