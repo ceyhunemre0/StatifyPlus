@@ -14,7 +14,7 @@ load_dotenv()
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 SECRET_KEY = os.getenv('SECRET_KEY')
-REDIRECT_URI = 'http://localhost:8888/callback'
+REDIRECT_URI = os.getenv('REDIRECT_URI')
 SCOPES = 'user-top-read user-read-private user-read-email user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-playback-state user-read-currently-playing'
 AUTH_URL = 'https://accounts.spotify.com/authorize'
 TOKEN_URL = 'https://accounts.spotify.com/api/token'
